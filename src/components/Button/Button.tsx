@@ -1,22 +1,36 @@
-import React from "react";
+import React, { FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
 import classNames from "classnames";
 
 interface BaseButtonProps {
-  children: React.ReactNode;
-  className?: string;
-  disabled?: boolean;
-  size?: "large" | "small";
+  /** can be set to primary ghost dashed link or default */
   btnType?: "primary" | "danger" | "link" | "default";
+  /** add customized className for button */
+  size?: "large" | "small";
+  /** redirect url of link button */
+  className?: string;
+  /** disabled state of button */
+  disabled?: boolean;
+  /** set the size of button */
   href?: string;
+  children: React.ReactNode;
 }
 
-type NativeButtonProps = BaseButtonProps &
-  React.ButtonHTMLAttributes<HTMLElement>;
-type AnchorButtonProps = BaseButtonProps &
-  React.AnchorHTMLAttributes<HTMLElement>;
+type NativeButtonProps = BaseButtonProps & ButtonHTMLAttributes<HTMLElement>;
+type AnchorButtonProps = BaseButtonProps & AnchorHTMLAttributes<HTMLElement>;
 export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>;
 
-const Button: React.FC<ButtonProps> = (props) => {
+/**
+ * To trigger an operation, and completing specific interactions.
+ * Support all the attributes of HTML button and link
+ *
+ * ### usage
+ *
+ * ~~~js
+ * import { Button } from 'normalized'
+ * ~~~
+ */
+
+const Button: FC<ButtonProps> = (props) => {
   const {
     children,
     className,
