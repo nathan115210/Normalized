@@ -63,7 +63,6 @@ $font-family-base: $font-family-sans-serif !default;
 *** Font ***
 ====================
 */
-
 // font-size
 $font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
 $font-size-lg: $font-size-base * 1.25 !default;
@@ -111,7 +110,6 @@ $body-text-align: null !default;
 *** Spacing ***
 ====================
 */
-
 // basic spacings
 $spacer: 1rem !default;
 $headings-margin-bottom: $spacer / 2 !default;
@@ -246,6 +244,11 @@ $btn-border-radius-sm: $border-radius-sm !default;
 $btn-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
   border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !default;
 
+/* 
+====================
+*** Menu ***
+====================
+*/
 // menu
 $menu-border-width: $border-width !default;
 $menu-border-color: $border-color !default;
@@ -260,3 +263,7 @@ $menu-item-active-color: $primary !default;
 $menu-item-active-background-color: lighten($primary, 40%) !default;
 $menu-item-active-border-width: 2px !default;
 $menu-item-disabled-color: $gray-600 !default;
+
+//sub-menu
+$submenu-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12),
+  0 0 6px 0 rgba(0, 0, 0, 0.04);
