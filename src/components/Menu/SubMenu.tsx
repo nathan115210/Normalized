@@ -4,7 +4,7 @@ import { MenuContext } from "./Menu";
 import { MenuItemProps } from "./MenuItem";
 
 export interface SubMenuProps {
-  index?: number;
+  index?: string;
   title: string;
   className?: string;
 }
@@ -48,7 +48,9 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
     const childrenComponent = React.Children.map(children, (child, i) => {
       const childEle = child as FunctionComponentElement<MenuItemProps>;
       if (childEle.type.displayName === "MenuItem") {
-        return childEle;
+        return React.cloneElement(childEle, {
+          index: `${index}-${i}`,
+        });
       } else {
         console.error(
           '"Warning: Sun menu has a child which is not the menuItem component"'
