@@ -12,7 +12,10 @@ export interface SubMenuProps {
 const SubMenu: React.FC<SubMenuProps> = (props) => {
   const { index, title, children, className } = props;
   const context = useContext(MenuContext);
-  const [menuOpen, setOpen] = useState(false);
+  const openSubMenus = context.defaultOpenSubMenus as string[];
+  const isOpened =
+    index && context.mode === "vertical" ? openSubMenus.includes(index) : false;
+  const [menuOpen, setOpen] = useState(isOpened);
   const classes = classNames("menu-item submenu-item", className, {
     "is-active": context.index === index,
   });
