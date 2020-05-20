@@ -10,13 +10,13 @@ import Menu, { MenuProps } from "./Menu";
 import MenuItem from "./MenuItem";
 
 const testProps: MenuProps = {
-  defaultIndex: 0,
+  defaultIndex: "0",
   onSelect: jest.fn(),
   className: "test-ClassName",
 };
 
 const testVerticalProps: MenuProps = {
-  defaultIndex: 0,
+  defaultIndex: "0",
   mode: "vertical",
 };
 
@@ -54,12 +54,12 @@ describe("test menu and MenuItem component", () => {
     fireEvent.click(thirdItem);
     expect(thirdItem).toHaveClass("is-active");
     expect(activeEle).not.toHaveClass("is-active");
-    expect(testProps.onSelect).toHaveBeenCalledWith(2);
+    expect(testProps.onSelect).toHaveBeenCalledWith("2");
   });
   it("disabled menu item should not able to be clicked", () => {
     fireEvent.click(disabledEle);
     expect(disabledEle).not.toHaveClass("is-active");
-    expect(testProps.onSelect).not.toHaveBeenCalledWith(1);
+    expect(testProps.onSelect).not.toHaveBeenCalledWith("1");
   });
   it("should render vertical mode when the mode is set to vertical", () => {
     cleanup();
