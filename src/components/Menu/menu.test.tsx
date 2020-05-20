@@ -45,7 +45,7 @@ describe("test menu and MenuItem component", () => {
   it("should render correct Menu and MenuItem based on default props", () => {
     expect(menuEle).toBeInTheDocument;
     expect(menuEle).toHaveClass("normalized-menu test-ClassName");
-    expect(menuEle.getElementsByTagName("li").length).toEqual(3);
+    expect(menuEle.querySelectorAll(":scope > li").length).toEqual(4);
     expect(activeEle).toHaveClass("menu-item is-active");
     expect(disabledEle).toHaveClass("menu-item is-disabled");
   });
