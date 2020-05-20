@@ -28,7 +28,8 @@ const SubMenu: React.FC<SubMenuProps> = (props) => {
       setOpen(toggle);
     }, 300);
   };
-  const clickEvents = context.mode === "vertical" ? handleClick : {};
+  const clickEvents =
+    context.mode === "vertical" ? { onClick: handleClick } : {};
   const hoverEvents =
     context.mode !== "vertical"
       ? {
