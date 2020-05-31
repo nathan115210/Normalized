@@ -20,6 +20,7 @@ const testProps: MenuProps = {
 const testVerticalProps: MenuProps = {
   defaultIndex: "0",
   mode: "vertical",
+  defaultOpenSubMenus: ["4"],
 };
 
 const generateMenu = (props: MenuProps) => {
@@ -31,7 +32,7 @@ const generateMenu = (props: MenuProps) => {
       <SubMenu title="dropdown">
         <MenuItem>drop 1</MenuItem>
       </SubMenu>
-      <SubMenu title="opened" openAsDefault>
+      <SubMenu title="opened">
         <MenuItem>opened 1</MenuItem>
       </SubMenu>
     </Menu>
@@ -130,7 +131,7 @@ describe("test Menu and MenuItem components in vertical mode", () => {
     fireEvent.click(wrapper2.getByText("dropdown"));
     expect(dropdownEle).toBeVisible();
   });
-  it("should show subMenu dropdown when openAsDefault set as true otherwise not", () => {
+  it("should show subMenu dropdown when defaultOpenSubMenus contains SubMeu index", () => {
     expect(wrapper2.queryByText("opened 1")).toBeVisible();
     expect(wrapper2.queryByText("drop 1")).not.toBeVisible();
   });
