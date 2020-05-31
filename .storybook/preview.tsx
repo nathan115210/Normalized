@@ -29,7 +29,6 @@ addDecorator(storyWrapper);
 const loaderFn = () => {
   const allExports = [require("../src/welcome.stories.tsx")];
   const req = require.context("../src/components", true, /\.stories\.tsx$/);
-  return [require("../src/components/Button/button.stories.tsx")];
   req.keys().forEach((fname) => allExports.push(req(fname)));
   return allExports;
 };

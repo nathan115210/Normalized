@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react";
+import React, { FC, useState, createContext, CSSProperties } from "react";
 import classNames from "classnames";
 import { MenuItemProps } from "./MenuItem";
 
@@ -7,24 +7,30 @@ type MenuMode = "horizontal" | "vertical";
 type SelectCallback = (selectIndex: string) => void;
 
 export interface MenuProps {
+  /** default index of activated menu item*/
   defaultIndex?: string;
+  /** customized className */
   className?: string;
+  /** menu mode */
   mode?: MenuMode;
-  style?: React.CSSProperties;
+  /** customized style */
+  style?: CSSProperties;
+  /** the callback function which triggered by click menu  */
   onSelect?: SelectCallback;
+  /** open sub menu ad default, only works for vertical mode */
   defaultOpenSubMenus?: string[];
 }
 
 interface IMenuContext {
   index: string;
-  onSelect?: SelectCallback;
+  onSelect?: (selectedIndex: string) => void;
   mode?: MenuMode;
   defaultOpenSubMenus?: string[];
 }
 
 export const MenuContext = createContext<IMenuContext>({ index: "0" });
 
-const Menu: React.FC<MenuProps> = (props) => {
+const Menu: FC<MenuProps> = (props) => {
   const {
     defaultIndex,
     className,

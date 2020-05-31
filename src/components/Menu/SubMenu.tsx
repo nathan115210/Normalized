@@ -1,19 +1,30 @@
-import React, { useState, useContext, FunctionComponentElement } from "react";
+import React, {
+  FC,
+  useState,
+  useContext,
+  FunctionComponentElement,
+} from "react";
 import classNames from "classnames";
 import { MenuContext } from "./Menu";
 import { MenuItemProps } from "./MenuItem";
 
 export interface SubMenuProps {
+  /** SubMenu index */
   index?: string;
+  /** SubMenu title */
   title: string;
+  /** Customized  classNames*/
   className?: string;
-  openAsDefault?: boolean;
 }
 
-const SubMenu: React.FC<SubMenuProps> = (props) => {
-  const { index, title, children, className, openAsDefault } = props;
+const SubMenu: FC<SubMenuProps> = (props) => {
+  const { index, title, children, className } = props;
   const context = useContext(MenuContext);
-  const isOpened = openAsDefault ? true : false;
+  const openedSubMenus = context.defaultOpenSubMenus as Array<string>;
+  const isOpened =
+    index && context.mode === "vertical"
+      ? openedSubMenus.includes(index)
+      : false;
   const [menuOpen, setOpen] = useState(isOpened);
   const classes = classNames("menu-item submenu-item", className, {
     "is-active": context.index === index,
