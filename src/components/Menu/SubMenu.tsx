@@ -7,7 +7,7 @@ import React, {
 import classNames from "classnames";
 import { MenuContext } from "./Menu";
 import { MenuItemProps } from "./MenuItem";
-import Icon, { IconProps } from "../Icon/Icon";
+import Icon from "../Icon/Icon";
 
 export interface SubMenuProps {
   /** SubMenu index */
