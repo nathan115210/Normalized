@@ -6,8 +6,8 @@ import Button from "./Button";
 const defaultButton = () => <Button>Default</Button>;
 export const buttonEWidthSizes = () => (
   <>
-    <Button size="large">Large</Button>
-    <Button size="small">Small</Button>
+    <Button size="lg">Large</Button>
+    <Button size="sm">Small</Button>
   </>
 );
 
