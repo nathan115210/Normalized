@@ -8,6 +8,7 @@ import classNames from "classnames";
 import { MenuContext } from "./Menu";
 import { MenuItemProps } from "./MenuItem";
 import Icon from "../Icon/Icon";
+import Transition, { TransitionProps } from "../Transition/Transition";
 
 export interface SubMenuProps {
   /** SubMenu index */
@@ -16,10 +17,12 @@ export interface SubMenuProps {
   title: string;
   /** Customized  classNames*/
   className?: string;
+  /** The animation effect of subMenu */
+  animation?: TransitionProps["animation"];
 }
 
 const SubMenu: FC<SubMenuProps> = (props) => {
-  const { index, title, children, className } = props;
+  const { index, title, children, className, animation } = props;
   const context = useContext(MenuContext);
   const openedSubMenus = context.defaultOpenSubMenus as Array<string>;
   const isOpened =
@@ -73,8 +76,14 @@ const SubMenu: FC<SubMenuProps> = (props) => {
         );
       }
     });
-    return <ul className={subMenuClasses}>{childrenComponent}</ul>;
+    const subMenuAnimation = animation ? animation : "zoom-in-top";
+    return (
+      <Transition in={menuOpen} timeout={300} animation={subMenuAnimation}>
+        <ul className={subMenuClasses}> {childrenComponent}</ul>
+      </Transition>
+    );
   };
+
   return (
     <li key={index} className={classes} {...hoverEvents}>
       <div className="submenu-title" {...clickEvents}>

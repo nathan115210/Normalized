@@ -60,11 +60,9 @@
   }
 
   & .normalized-submenu {
-    display: none;
     list-style: none;
     padding-left: 0;
     white-space: nowrap;
-    //transition: $menu-transition;
     .menu-item {
       padding: $menu-item-padding-y $menu-item-padding-x;
       cursor: pointer;
@@ -74,9 +72,6 @@
       &:hover {
         color: $menu-item-active-color !important;
       }
-    }
-    &.submenu-opened {
-      display: block;
     }
   }
   // vertical menu
