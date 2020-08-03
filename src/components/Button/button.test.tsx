@@ -9,7 +9,7 @@ const defaultProps = {
 
 const testProps: ButtonProps = {
   btnType: "primary",
-  size: "large",
+  size: "lg",
   className: "testClassName",
 };
 
@@ -33,7 +33,7 @@ describe("test Button component", () => {
     const wrapper = render(<Button {...testProps}>Button</Button>);
     const element = wrapper.getByText("Button");
     expect(element).toBeInTheDocument();
-    expect(element).toHaveClass("btn-primary btn-large testClassName");
+    expect(element).toHaveClass("btn-primary btn-lg testClassName");
   });
   it("should render a link when the btnType is link and href is provided", () => {
     const wrapper = render(

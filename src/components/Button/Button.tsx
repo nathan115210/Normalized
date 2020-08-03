@@ -1,11 +1,14 @@
 import React, { FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react";
 import classNames from "classnames";
 
+export type ButtonType = "primary" | "danger" | "link" | "default";
+export type ButtonSize = "lg" | "sm";
+
 interface BaseButtonProps {
   /** can be set to primary ghost dashed link or default */
-  btnType?: "primary" | "danger" | "link" | "default";
+  btnType?: ButtonType;
   /** add customized className for button */
-  size?: "large" | "small";
+  size?: ButtonSize;
   /** redirect url of link button */
   className?: string;
   /** disabled state of button */
