@@ -286,3 +286,21 @@ $nav-tabs-link-active-color: $primary !default;
 $nav-tabs-link-active-bg: $body-bg !default;
 $nav-tabs-link-active-border-color: $gray-300 $gray-300 $nav-tabs-link-active-bg !default;
 $nav-tabs-content-margin: 1rem !default;
+
+/* 
+====================
+*** Navs ***
+====================
+*/
+/* 
+Define alert colors, border radius, and padding.
+*/
+
+$alert-padding-y: 0.75rem !default;
+$alert-padding-x: 1.25rem !default;
+$alert-margin-bottom: 1rem !default;
+$alert-border-radius: $border-radius !default;
+$alert-title-font-weight: $font-weight-bold !default;
+$alert-border-width: $border-width !default;
+$alert-description-font-size: $font-size-sm !default;
+$alert-description-top-margin: 0.3rem !default;
