@@ -10,6 +10,22 @@ $alert-colors: (
   margin-bottom: $alert-margin-bottom;
   border: $alert-border-width solid transparent;
   border-radius: $alert-border-radius;
+  height: auto;
+  word-wrap: break-word;
+  &-with-description {
+    position: relative;
+    padding-left: 63px;
+    color: rgba(0, 0, 0, 0.65);
+    line-height: 1.5715;
+    border-radius: 2px;
+  }
+  &-without-description {
+    padding-left: 2.5rem;
+  }
+  &-icon {
+    position: absolute;
+    left: 1rem;
+  }
   &-close {
     position: absolute;
     top: 0;
