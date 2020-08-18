@@ -92,7 +92,7 @@ const SynchronousRequestAutoComplete = () => {
     const itemWithNumber = item as DataSourceType<LakerPlayerProps>;
     return (
       <>
-        <h2>Name: {item.value}</h2>
+        <strong>Name: {item.value}</strong>
         <p>Number: {itemWithNumber.number}</p>
       </>
     );
@@ -122,7 +122,7 @@ const AsynchronousRequestAutoComplete = () => {
     const itemWithGitHubProps = item as DataSourceType<GithubUserProps>;
     return (
       <>
-        <h2>Name: {itemWithGitHubProps.login}</h2>
+        <strong>Name: {itemWithGitHubProps.login}</strong>
         <p>Url: {itemWithGitHubProps.url}</p>
       </>
     );
