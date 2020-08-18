@@ -5,6 +5,7 @@ import React, {
   KeyboardEvent,
   ReactElement,
   useEffect,
+  useRef,
 } from "react";
 import classnames from "classnames";
 import Input, { InputProps } from "../Input/Input";
@@ -36,10 +37,11 @@ const AutoComplete: FC<AutoCompleteProps> = (props) => {
   const [suggestions, setSuggestions] = useState<DataSourceType[]>([]);
   const [loading, setLoading] = useState(false);
   const [highlightIndex, setHighlightIndex] = useState(-1);
+  const triggerSearch = useRef(false);
 
   const debouncedValue = useDebounce(inputValue, 500);
   useEffect(() => {
-    if (debouncedValue) {
+    if (debouncedValue && triggerSearch.current) {
       setLoading(true);
       const results = fetchSuggestions(debouncedValue);
       if (results instanceof Promise) {
@@ -58,6 +60,7 @@ const AutoComplete: FC<AutoCompleteProps> = (props) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();
     setInputValue(value);
+    triggerSearch.current = true;
   };
   const highlight = (index: number) => {
     if (index < 0) index = 0;
@@ -97,6 +100,7 @@ const AutoComplete: FC<AutoCompleteProps> = (props) => {
     if (onSelect) {
       onSelect(item);
     }
+    triggerSearch.current = false;
   };
 
   const renderTemplate = (item: DataSourceType) => {
