@@ -11,6 +11,8 @@ import classnames from "classnames";
 import Input, { InputProps } from "../Input/Input";
 import Icon from "../Icon/Icon";
 import useDebounce from "../../hooks/useDebounce";
+import useClickOutside from "../../hooks/useClickOutside";
+import Transition from "../Transition/Transition";
 interface DataSourceObject {
   value: string;
 }
@@ -36,24 +38,36 @@ const AutoComplete: FC<AutoCompleteProps> = (props) => {
   const [inputValue, setInputValue] = useState(value as string);
   const [suggestions, setSuggestions] = useState<DataSourceType[]>([]);
   const [loading, setLoading] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const [highlightIndex, setHighlightIndex] = useState(-1);
   const triggerSearch = useRef(false);
-
-  const debouncedValue = useDebounce(inputValue, 500);
+  const componentRef = useRef<HTMLDivElement>(null);
+  const debouncedValue = useDebounce(inputValue, 300);
+  useClickOutside(componentRef, () => {
+    setSuggestions([]);
+  });
   useEffect(() => {
     if (debouncedValue && triggerSearch.current) {
-      setLoading(true);
+      setSuggestions([]);
       const results = fetchSuggestions(debouncedValue);
       if (results instanceof Promise) {
+        setLoading(true);
         results.then((data) => {
           setLoading(false);
           setSuggestions(data);
+          if (data.length > 0) {
+            setShowDropdown(true);
+          }
         });
       } else {
         setSuggestions(results);
+        setShowDropdown(true);
+        if (results.length > 0) {
+          setShowDropdown(true);
+        }
       }
     } else {
-      setSuggestions([]);
+      setShowDropdown(false);
     }
     setHighlightIndex(-1);
   }, [debouncedValue, fetchSuggestions]);
@@ -87,7 +101,7 @@ const AutoComplete: FC<AutoCompleteProps> = (props) => {
         break;
       // Esc key
       case 27:
-        setSuggestions([]);
+        setShowDropdown(false);
         break;
       default:
         break;
@@ -96,7 +110,8 @@ const AutoComplete: FC<AutoCompleteProps> = (props) => {
 
   const handleSelect = (item: DataSourceType) => {
     setInputValue(item.value);
-    setSuggestions([]);
+    setShowDropdown(false);
+
     if (onSelect) {
       onSelect(item);
     }
@@ -109,41 +124,51 @@ const AutoComplete: FC<AutoCompleteProps> = (props) => {
 
   const generateDropDown = () => {
     return (
-      <ul>
-        {suggestions.map((suggestion, index) => {
-          const cNames = classnames("suggestion-item", {
-            "item-highlighted": index === highlightIndex,
-          });
-          return (
-            <li
-              key={index}
-              onClick={() => {
-                handleSelect(suggestion);
-              }}
-              className={cNames}
-            >
-              {renderTemplate(suggestion)}
-            </li>
-          );
-        })}
-      </ul>
+      <Transition
+        in={showDropdown || loading}
+        animation="zoom-in-top"
+        timeout={300}
+        onExited={() => {
+          setSuggestions([]);
+        }}
+      >
+        <ul className="normalized-suggestion-list">
+          {loading && (
+            <div className="suggestions-loading-icon">
+              <Icon icon="spinner" spin />
+            </div>
+          )}
+          {suggestions.map((suggestion, index) => {
+            const cNames = classnames("suggestion-item", {
+              "is-active": index === highlightIndex,
+            });
+            return (
+              <li
+                key={index}
+                className={cNames}
+                onClick={() => {
+                  handleSelect(suggestion);
+                }}
+              >
+                {renderTemplate(suggestion)}
+              </li>
+            );
+          })}
+        </ul>
+      </Transition>
     );
   };
 
   return (
-    <div className="normalized-auto-complete">
+    <div className="normalized-auto-complete" ref={componentRef}>
       <Input
         value={inputValue}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         {...restProps}
       />
-      {loading && (
-        <ul>
-          <Icon icon="spinner" spin />
-        </ul>
-      )}
-      {suggestions.length > 0 && generateDropDown()}
+
+      {generateDropDown()}
     </div>
   );
 };
