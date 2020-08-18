@@ -7,7 +7,14 @@ interface LakerPlayerProps {
   value: string;
   number: number;
 }
-const DefaultAutoComplete = () => {
+
+interface GithubUserProps {
+  login: string;
+  url: string;
+  avatar_url: string;
+}
+
+const SynchronousRequestAutoComplete = () => {
   const lakers = [
     {
       value: "Kostas Antetokounmpo",
@@ -77,7 +84,9 @@ const DefaultAutoComplete = () => {
     },
   ];
   const handleFetch = (query: string) => {
-    return lakers.filter((player) => player.value.includes(query));
+    return lakers.filter((player) =>
+      player.value.toLowerCase().includes(query)
+    );
   };
   const renderOption = (item: DataSourceType) => {
     const itemWithNumber = item as DataSourceType<LakerPlayerProps>;
@@ -97,7 +106,36 @@ const DefaultAutoComplete = () => {
   );
 };
 
-storiesOf("AutoComplete", module).add(
-  "Default AutoComplete",
-  DefaultAutoComplete
-);
+const AsynchronousRequestAutoComplete = () => {
+  const handleFetch = (query: string) => {
+    return fetch(`https://api.github.com/search/users?q=${query}`)
+      .then((res) => res.json())
+      .then(({ items }) => {
+        const formatItems = items
+          .slice(0, 10)
+          .map((item: any) => ({ value: item.login, ...item }));
+        return formatItems;
+      });
+  };
+
+  const renderOption = (item: DataSourceType) => {
+    const itemWithGitHubProps = item as DataSourceType<GithubUserProps>;
+    return (
+      <>
+        <h2>Name: {itemWithGitHubProps.login}</h2>
+        <p>Url: {itemWithGitHubProps.url}</p>
+      </>
+    );
+  };
+  return (
+    <AutoComplete
+      fetchSuggestions={handleFetch}
+      onSelect={action("selected")}
+      renderOption={renderOption}
+    />
+  );
+};
+
+storiesOf("AutoComplete", module)
+  .add("Synchronous request AutoComplete", SynchronousRequestAutoComplete)
+  .add("Asynchronous request AutoComplete", AsynchronousRequestAutoComplete);
