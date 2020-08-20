@@ -26,10 +26,13 @@
     color: $body-color;
     &.is-active {
       background: $menu-item-active-color !important;
-      color: $white !important;
+      color: $white;
+      &:hover {
+        color: $white;
+      }
     }
     &:hover {
-      color: $menu-item-active-color !important;
+      background: $gray-300;
     }
   }
 }
