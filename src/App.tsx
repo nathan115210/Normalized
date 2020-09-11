@@ -6,6 +6,7 @@ import Menu from "./components/Menu/Menu";
 import MenuItem from "./components/Menu/MenuItem";
 import Button from "./components/Button/Button";
 import Transition from "./components/Transition/Transition";
+import Select from "./components/Select/Select";
 library.add(fas);
 
 const App: React.FC = () => {

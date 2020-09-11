@@ -3,6 +3,7 @@ import React, {
   ReactElement,
   InputHTMLAttributes,
   ChangeEvent,
+  forwardRef,
 } from "react";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import classNames from "classnames";
@@ -35,7 +36,8 @@ export interface InputProps
  * ~~~
  * Support all HTMLInput attributes
  */
-const Input: FC<InputProps> = (props) => {
+
+const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { disabled, size, icon, prepend, append, style, ...restProps } = props;
   const cNames = classNames("normalized-input-wrapper", {
     [`input-size-${size}`]: size,
@@ -65,6 +67,7 @@ const Input: FC<InputProps> = (props) => {
         </div>
       )}
       <input
+        ref={ref}
         className="normalized-input-inner"
         disabled={disabled}
         {...restProps}
@@ -72,6 +75,6 @@ const Input: FC<InputProps> = (props) => {
       {append && <div className="normalized-input-group--append">{append}</div>}
     </div>
   );
-};
+});
 
 export default Input;
