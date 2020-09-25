@@ -17,6 +17,8 @@ export interface UploadFile {
 }
 
 export interface UploadProps {
+  uploadButtonText: string;
+  uploadDisclaimer?: string;
   action: string;
   defaultFileList?: UploadFile[];
   beforeUpload?: (file: File) => boolean | Promise<File>;
@@ -30,6 +32,8 @@ export interface UploadProps {
 
 export const Upload: FC<UploadProps> = (props) => {
   const {
+    uploadButtonText,
+    uploadDisclaimer,
     action,
     defaultFileList,
     beforeUpload,
