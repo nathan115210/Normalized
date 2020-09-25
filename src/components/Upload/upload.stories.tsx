@@ -32,7 +32,7 @@ const SimpleUpload = () => {
       uploadDisclaimer="Upload file size and types limitations "
       action="https://run.mocky.io/v3/0278e822-1a48-4dcf-bef9-3a328ad6de79"
       onChange={action("changed")}
-      defaultFileList={defaultFileList}
+      // defaultFileList={defaultFileList}
       onRemove={action("removed")}
     />
   );
