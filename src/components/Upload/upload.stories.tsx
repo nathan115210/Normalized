@@ -29,11 +29,15 @@ const SimpleUpload = () => {
   return (
     <Upload
       uploadButtonText="Upload cta"
-      uploadDisclaimer="Upload file size and types limitations "
-      action="https://run.mocky.io/v3/0278e822-1a48-4dcf-bef9-3a328ad6de79"
+      uploadDisclaimer="The limitations of upload file size and types"
+      action="https://run.mocky.io/v3/17334c6b-0c04-4f01-9033-eb145b34b5e4"
       onChange={action("changed")}
-      // defaultFileList={defaultFileList}
+      defaultFileList={defaultFileList}
       onRemove={action("removed")}
+      data={{ key: "value" }}
+      headers={{ "X-Power-By": "normalized" }}
+      accept=".jpg"
+      multipleSelect={false}
     />
   );
 };

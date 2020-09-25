@@ -18,7 +18,7 @@ addParameters({
   info: {
     inline: true,
     header: false,
-    propTablesExclude: [Fragment],
+    // propTablesExclude: [Fragment],
   },
 });
 
