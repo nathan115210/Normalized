@@ -154,9 +154,16 @@ export const Upload: FC<UploadProps> = (props) => {
   };
   console.log("fileList", fileList);
   return (
-    <div className="normalized-upload-component">
-      <Button btnType="primary" onClick={handleClick}>
-        Upload File
+    <div className="normalized-upload">
+      {uploadDisclaimer && (
+        <span className="normalized-upload-disclaimer">{uploadDisclaimer}</span>
+      )}
+      <Button
+        btnType="primary"
+        className="normalized-upload-button"
+        onClick={handleClick}
+      >
+        {uploadButtonText}
       </Button>
       <input
         className="normalized-file-input"
