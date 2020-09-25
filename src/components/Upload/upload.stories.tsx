@@ -19,9 +19,6 @@ const SimpleUpload = () => {
     <Upload
       action="https://run.mocky.io/v3/0278e822-1a48-4dcf-bef9-3a328ad6de79"
       onChange={action("changed")}
-      onProgress={action("progress")}
-      onSuccess={action("success")}
-      onError={action("error")}
     />
   );
 };
