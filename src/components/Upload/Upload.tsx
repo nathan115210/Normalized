@@ -51,11 +51,11 @@ export const Upload: FC<UploadProps> = (props) => {
     multipleSelect,
     uploadButtonText,
     uploadDisclaimer,
-    // TODO: add the logic to implement if accept multipleUpload
     multipleUpload,
   } = props;
   const fileInput = useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || []);
+  const [isButtonDisabled, setButtonDisabled] = useState(false);
   const updateFileList = (
     updateFile: UploadFile,
     updateObj: Partial<UploadFile>
@@ -89,6 +89,7 @@ export const Upload: FC<UploadProps> = (props) => {
     setFileList((prevList) => {
       return prevList.filter((item) => item.uid !== file.uid);
     });
+    setButtonDisabled(false);
     if (onRemove) {
       onRemove(file);
     }
@@ -109,10 +110,16 @@ export const Upload: FC<UploadProps> = (props) => {
         }
       }
     });
+    if (!multipleUpload && files.length > 0) {
+      setButtonDisabled(true);
+    }
   };
   const post = (file: File) => {
+    const file_ext = file.name.substring(file.name.lastIndexOf(".") + 1);
+    const file_name: string =
+      file.name.length > 20 ? file.name.substring(0, 16) + file_ext : file.name;
     let _file: UploadFile = {
-      uid: Date.now() + "upload-file",
+      uid: Date.now() + file_name,
       status: "ready",
       name: file.name,
       size: file.size,
@@ -188,6 +195,7 @@ export const Upload: FC<UploadProps> = (props) => {
         btnType="primary"
         className="normalized-upload-button"
         onClick={handleClick}
+        disabled={isButtonDisabled}
       >
         {uploadButtonText}
       </Button>
@@ -200,5 +208,8 @@ export const Upload: FC<UploadProps> = (props) => {
 
 Upload.defaultProps = {
   name: "file",
+  multipleSelect: true,
+  multipleUpload: true,
+  accept: "*",
 };
 export default Upload;
