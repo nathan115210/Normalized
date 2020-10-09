@@ -19,7 +19,7 @@ const simpleUpload = () => (
   </Upload>
 );
 
-const uploadStatus = () => {
+const uploadProgress = () => {
   const defaultFileList: UploadFile[] = [
     {
       uid: "123",
@@ -112,7 +112,7 @@ const dragUpload = () => (
 
 storiesOf("Upload component", module)
   .add("Upload", simpleUpload)
-  .add("Upload status", uploadStatus)
+  .add("Upload progress", uploadProgress)
   .add("Check before upload", checkUpload, {
     info: { source: false, text: textCheck },
   })
