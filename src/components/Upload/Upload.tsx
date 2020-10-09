@@ -55,7 +55,6 @@ export const Upload: FC<UploadProps> = (props) => {
   } = props;
   const fileInput = useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || []);
-  const [isButtonDisabled, setButtonDisabled] = useState(false);
   const updateFileList = (
     updateFile: UploadFile,
     updateObj: Partial<UploadFile>
@@ -89,7 +88,6 @@ export const Upload: FC<UploadProps> = (props) => {
     setFileList((prevList) => {
       return prevList.filter((item) => item.uid !== file.uid);
     });
-    setButtonDisabled(false);
     if (onRemove) {
       onRemove(file);
     }
@@ -110,9 +108,6 @@ export const Upload: FC<UploadProps> = (props) => {
         }
       }
     });
-    if (!multipleUpload && files.length > 0) {
-      setButtonDisabled(true);
-    }
   };
   const post = (file: File) => {
     const file_ext = file.name.substring(file.name.lastIndexOf(".") + 1);
