@@ -1,7 +1,8 @@
-import React, { FC, useRef, ChangeEvent, useState } from "react";
+import React, { FC, useRef, ChangeEvent, useState, Children } from "react";
 import axios from "axios";
 import UploadList from "./UploadList";
 import Button from "../Button/Button";
+import DragContainer from "./DragContainer";
 export type UploadFileStatus = "ready" | "uploading" | "success" | "error";
 export interface UploadFile {
   uid: string;
@@ -14,8 +15,6 @@ export interface UploadFile {
   error?: any;
 }
 export interface UploadProps {
-  uploadButtonText: string;
-  uploadDisclaimer?: string;
   action: string;
   defaultFileList?: UploadFile[];
   beforeUpload?: (file: File) => boolean | Promise<File>;
@@ -31,6 +30,7 @@ export interface UploadProps {
   accept?: string;
   multipleSelect?: boolean;
   multipleUpload?: boolean;
+  drag?: boolean;
 }
 
 export const Upload: FC<UploadProps> = (props) => {
@@ -49,9 +49,9 @@ export const Upload: FC<UploadProps> = (props) => {
     withCredentials,
     accept,
     multipleSelect,
-    uploadButtonText,
-    uploadDisclaimer,
     multipleUpload,
+    children,
+    drag,
   } = props;
   const fileInput = useRef<HTMLInputElement>(null);
   const [fileList, setFileList] = useState<UploadFile[]>(defaultFileList || []);
@@ -181,27 +181,33 @@ export const Upload: FC<UploadProps> = (props) => {
 
   return (
     <div className="normalized-upload">
-      <input
-        className="normalized-file-input"
-        style={{ display: "none" }}
-        ref={fileInput}
-        onChange={handleFileChange}
-        type="file"
-        accept={accept}
-        multiple={multipleSelect}
-      />
-      <UploadList fileList={fileList} onRemove={handleRemove} />
-      <Button
-        btnType="primary"
-        className="normalized-upload-button"
+      <div
+        className="normalized-upload-input"
+        style={{ display: "inline-block" }}
         onClick={handleClick}
-        disabled={isButtonDisabled}
       >
-        {uploadButtonText}
-      </Button>
-      {uploadDisclaimer && (
-        <span className="normalized-upload-disclaimer">{uploadDisclaimer}</span>
-      )}
+        {drag ? (
+          <DragContainer
+            onFile={(files) => {
+              uploadFiles(files);
+            }}
+          >
+            {children}
+          </DragContainer>
+        ) : (
+          children
+        )}
+        <input
+          className="normalized-file-input"
+          style={{ display: "none" }}
+          ref={fileInput}
+          onChange={handleFileChange}
+          type="file"
+          accept={accept}
+          multiple={multipleSelect}
+        />
+      </div>
+      <UploadList fileList={fileList} onRemove={handleRemove} />
     </div>
   );
 };
