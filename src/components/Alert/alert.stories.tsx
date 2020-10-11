@@ -10,12 +10,12 @@ const defaultAlert = () => {
 
 const stylesAlert = () => {
   return (
-    <>
+    <div>
       <Alert title="This is Default alert!"></Alert>
       <Alert title="This is Success alert!" type="success"></Alert>
       <Alert title="This is Danger alert!" type="danger"></Alert>
       <Alert title="This is Warning alert!" type="warning"></Alert>
-    </>
+    </div>
   );
 };
 const descAlert = () => {
@@ -29,7 +29,7 @@ const descAlert = () => {
 };
 const iconAlert = () => {
   return (
-    <>
+    <div>
       <Alert title="Alert shows icon with title only" showIcon></Alert>
       <Alert
         title="Alert shows icon with description"
@@ -45,15 +45,15 @@ const iconAlert = () => {
       ></Alert>
       <Alert title="This is warning with icon!" type="warning" showIcon></Alert>
       <Alert title="This is Danger with icon!" type="danger" showIcon></Alert>
-    </>
+    </div>
   );
 };
 const closableAlert = () => {
   return (
-    <>
+    <div>
       <Alert title="This is alert with closable"></Alert>
       <Alert title="This is alert without closable" closable={false}></Alert>
-    </>
+    </div>
   );
 };
 

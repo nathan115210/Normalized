@@ -13,78 +13,82 @@ interface GithubUserProps {
   url: string;
   avatar_url: string;
 }
-
-const SynchronousRequestAutoComplete = () => {
+const simpleComplete = () => {
   const lakers = [
-    {
-      value: "Kostas Antetokounmpo",
-      number: 37,
-    },
-    {
-      value: "Avery Bradley",
-      number: 11,
-    },
-    {
-      value: "Devontae Cacok",
-      number: 12,
-    },
-    {
-      value: "Kentavious Caldwell-Pope",
-      number: 1,
-    },
-    {
-      value: "Alex Caruso",
-      number: 4,
-    },
-    {
-      value: "Quinn Cook",
-      number: 28,
-    },
-    {
-      value: "Anthony Davis",
-      number: 3,
-    },
-    {
-      value: "Jared Dudley",
-      number: 10,
-    },
-    {
-      value: "Danny Green",
-      number: 14,
-    },
-    { value: "Talen Horton-Tucker", number: 5 },
-    { value: "Dwight Howard", number: 39 },
-    {
-      value: "LeBron James",
-      number: 23,
-    },
-    {
-      value: "Kyle Kuzma",
-      number: 0,
-    },
-    {
-      value: "JaVale McGee",
-      number: 7,
-    },
-    {
-      value: "Markieff Morris",
-      number: 88,
-    },
-    {
-      value: "Rajon Rondo",
-      number: 9,
-    },
-    {
-      value: "JR Smith",
-      number: 21,
-    },
-    {
-      value: "Dion Waiters",
-      number: 18,
-    },
+    "bradley",
+    "pope",
+    "caruso",
+    "cook",
+    "cousins",
+    "james",
+    "AD",
+    "green",
+    "howard",
+    "kuzma",
+    "McGee",
+    "rando",
   ];
   const handleFetch = (query: string) => {
-    return lakers.filter((player) =>
+    return lakers
+      .filter((name) => name.includes(query))
+      .map((name) => ({ value: name }));
+  };
+  return (
+    <AutoComplete
+      fetchSuggestions={handleFetch}
+      onSelect={action("selected")}
+      placeholder="Try to type NBA Lakers team member's name"
+    />
+  );
+};
+
+const textComplete = `
+### Code sample
+~~~javascript
+const lakers = [
+    "bradley",
+    "pope",
+    "caruso",
+    "cook",
+    "cousins",
+    "james",
+    "AD",
+    "green",
+    "howard",
+    "kuzma",
+    "McGee",
+    "rando",
+  ];
+  const handleFetch = (query: string) => {
+    return lakers
+      .filter((name) => name.includes(query))
+      .map((name) => ({ value: name }));
+  };
+  return (
+    <AutoComplete
+      fetchSuggestions={handleFetch}
+      onSelect={action("selected")}
+      placeholder="Try to type NBA Lakers team member's name"
+    />
+  );
+~~~
+`;
+
+const CustomDropDownAutoComplete = () => {
+  const lakersWithNumber = [
+    { value: "bradley", number: 11 },
+    { value: "pope", number: 1 },
+    { value: "caruso", number: 4 },
+    { value: "cook", number: 2 },
+    { value: "cousins", number: 15 },
+    { value: "james", number: 23 },
+    { value: "AD", number: 3 },
+    { value: "green", number: 14 },
+    { value: "howard", number: 39 },
+    { value: "kuzma", number: 0 },
+  ];
+  const handleFetch = (query: string) => {
+    return lakersWithNumber.filter((player) =>
       player.value.toLowerCase().includes(query)
     );
   };
@@ -98,7 +102,48 @@ const SynchronousRequestAutoComplete = () => {
     );
   };
   return (
-    <>
+    <div>
+      <AutoComplete
+        fetchSuggestions={handleFetch}
+        onSelect={action("selected")}
+        renderOption={renderOption}
+        placeholder="Try to type any NBA Lakers Team player's name"
+      />
+    </div>
+  );
+};
+
+const textCustom = `
+### Code sample
+~~~javascript
+const lakersWithNumber = [
+    { value: "bradley", number: 11 },
+    { value: "pope", number: 1 },
+    { value: "caruso", number: 4 },
+    { value: "cook", number: 2 },
+    { value: "cousins", number: 15 },
+    { value: "james", number: 23 },
+    { value: "AD", number: 3 },
+    { value: "green", number: 14 },
+    { value: "howard", number: 39 },
+    { value: "kuzma", number: 0 },
+  ];
+  const handleFetch = (query: string) => {
+    return lakersWithNumber.filter((player) =>
+      player.value.toLowerCase().includes(query)
+    );
+  };
+  const renderOption = (item: DataSourceType) => {
+    const itemWithNumber = item as DataSourceType<LakerPlayerProps>;
+    return (
+      <>
+        <strong>Name: {item.value}</strong>
+        <p>Number: {itemWithNumber.number}</p>
+      </>
+    );
+  };
+  return (
+    <div>
       <p>
         Try to type any NBA Lakers Team player's name to get the full
         information, for example: james
@@ -107,12 +152,14 @@ const SynchronousRequestAutoComplete = () => {
         fetchSuggestions={handleFetch}
         onSelect={action("selected")}
         renderOption={renderOption}
+        placeholder="Try to type any NBA Lakers Team player's name"
       />
-    </>
+    </div>
   );
-};
+~~~
+`;
 
-const AsynchronousRequestAutoComplete = () => {
+const AjaxAutoComplete = () => {
   const handleFetch = (query: string) => {
     return fetch(`https://api.github.com/search/users?q=${query}`)
       .then((res) => res.json())
@@ -134,17 +181,55 @@ const AsynchronousRequestAutoComplete = () => {
     );
   };
   return (
-    <>
-      <p>Try to type any github username to get full info</p>
+    <div>
       <AutoComplete
         fetchSuggestions={handleFetch}
         onSelect={action("selected")}
         renderOption={renderOption}
+        placeholder="Try to type any github username to get full info"
       />
-    </>
+    </div>
   );
 };
 
+const textAjax = `
+### Code sample
+~~~javascript
+const handleFetch = (query: string) => {
+  return fetch('https://api.github.com/search/users?q='+ query)
+    .then(res => res.json())
+    .then(({ items }) => {
+      return items.slice(0, 10).map((item: any) => ({ value: item.login, ...item}))
+    })
+}
+
+const renderOption = (item: DataSourceType) => {
+  const itemWithGithub = item as DataSourceType<GithubUserProps>
+  return (
+    <>
+      <b>Name: {itemWithGithub.value}</b>
+      <span>url: {itemWithGithub.url}</span>
+    </>
+  )
+}
+return (
+  <AutoComplete 
+    fetchSuggestions={handleFetch}
+    onSelect={action("selected")}
+    renderOption={renderOption}
+    placeholder="Try to type any github username to get full info"
+  />
+)
+~~~
+`;
+
 storiesOf("AutoComplete", module)
-  .add("Synchronous request AutoComplete", SynchronousRequestAutoComplete)
-  .add("Asynchronous request AutoComplete", AsynchronousRequestAutoComplete);
+  .add("Simple Complete", simpleComplete, {
+    info: { source: false, text: textComplete },
+  })
+  .add("Custom drop-down options", CustomDropDownAutoComplete, {
+    info: { source: false, text: textCustom },
+  })
+  .add("Ajax AutoComplete", AjaxAutoComplete, {
+    info: { source: false, text: textAjax },
+  });

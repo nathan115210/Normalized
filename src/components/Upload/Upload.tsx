@@ -1,7 +1,6 @@
 import React, { FC, useRef, ChangeEvent, useState } from "react";
 import axios from "axios";
 import UploadList from "./UploadList";
-import Button from "../Button/Button";
 import DragContainer from "./DragContainer";
 export type UploadFileStatus = "ready" | "uploading" | "success" | "error";
 export interface UploadFile {

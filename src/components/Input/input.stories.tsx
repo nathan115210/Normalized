@@ -2,68 +2,32 @@ import React, { useState } from "react";
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import Input from "./Input";
-const ControlledInput = () => {
-  const [value, setValue] = useState("");
-  return (
-    <Input
-      value={value}
-      defaultValue={value}
-      onChange={(e) => {
-        setValue(e.target.value);
-      }}
-    />
-  );
-};
+
 const defaultInput = () => (
-  <>
-    <p>Default input</p>
-    <Input
-      style={{ width: "300px" }}
-      placeholder="placeholder"
-      onChange={action("changed")}
-    />
-    <p>Controlled input</p>
-    <ControlledInput />
-  </>
+  <Input placeholder="Default input" onChange={action("changed")} />
 );
 const disabledInput = () => (
-  <>
-    <p>Disabled input</p>
-    <Input style={{ width: "300px" }} placeholder="disabled input" disabled />
-  </>
+  <Input style={{ width: "300px" }} placeholder="disabled input" disabled />
 );
 
-const iconInput = () => (
-  <>
-    <p>Input with icon</p>
-    <Input
-      style={{ width: "300px" }}
-      placeholder="input with icon"
-      icon="search"
-    />
-  </>
-);
+const iconInput = () => <Input placeholder="input with icon" icon="search" />;
 
 const sizeInput = () => (
-  <>
-    <p>Large input</p>
-    <Input style={{ width: "300px" }} defaultValue="large size" size="lg" />
-    <p>Small input</p>
+  <div>
+    <Input style={{ width: "300px" }} placeholder="large size" size="lg" />
     <Input style={{ width: "300px" }} placeholder="small size" size="sm" />
-  </>
+  </div>
 );
 
 const pendInput = () => (
-  <>
-    <p>Prepend Input</p>
+  <div>
     <Input
       style={{ width: "300px" }}
-      defaultValue="prepend text"
+      placeholder="prepend text"
       prepend="https://"
     />
-    <p>Append Input</p>
-    <Input style={{ width: "300px" }} defaultValue="google" append=".com" />
-  </>
+    <Input style={{ width: "300px" }} placeholder="google" append=".com" />
+  </div>
 );
 
 storiesOf("Input component", module)

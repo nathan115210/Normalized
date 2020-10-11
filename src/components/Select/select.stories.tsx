@@ -4,17 +4,23 @@ import { action } from "@storybook/addon-actions";
 import Select from "./index";
 
 const defaultSelect = () => (
-  <Select
-    placeholder="Select"
-    onChange={action("changed")}
-    onVisibleChange={action("visible")}
+  <div
+    style={{
+      width: "500px",
+    }}
   >
-    <Select.Option value="option 1" />
-    <Select.Option value="option 2" />
-    <Select.Option value="option 3" />
-    <Select.Option value="disabled" disabled />
-    <Select.Option value="option 5" />
-  </Select>
+    <Select
+      placeholder="Select"
+      onChange={action("changed")}
+      onVisibleChange={action("visible")}
+    >
+      <Select.Option value="option 1" />
+      <Select.Option value="option 2" />
+      <Select.Option value="option 3" />
+      <Select.Option value="disabled" disabled />
+      <Select.Option value="option 5" />
+    </Select>
+  </div>
 );
 const multipleSelect = () => (
   <Select
