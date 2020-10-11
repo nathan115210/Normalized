@@ -98,11 +98,17 @@ const SynchronousRequestAutoComplete = () => {
     );
   };
   return (
-    <AutoComplete
-      fetchSuggestions={handleFetch}
-      onSelect={action("selected")}
-      renderOption={renderOption}
-    />
+    <>
+      <p>
+        Try to type any NBA Lakers Team player's name to get the full
+        information, for example: james
+      </p>
+      <AutoComplete
+        fetchSuggestions={handleFetch}
+        onSelect={action("selected")}
+        renderOption={renderOption}
+      />
+    </>
   );
 };
 
@@ -128,11 +134,14 @@ const AsynchronousRequestAutoComplete = () => {
     );
   };
   return (
-    <AutoComplete
-      fetchSuggestions={handleFetch}
-      onSelect={action("selected")}
-      renderOption={renderOption}
-    />
+    <>
+      <p>Try to type any github username to get full info</p>
+      <AutoComplete
+        fetchSuggestions={handleFetch}
+        onSelect={action("selected")}
+        renderOption={renderOption}
+      />
+    </>
   );
 };
 
