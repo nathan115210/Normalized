@@ -15,24 +15,46 @@ export interface UploadFile {
   error?: any;
 }
 export interface UploadProps {
+  /**Upload address */
   action: string;
+  /**List of uploaded files,*/
   defaultFileList?: UploadFile[];
+  /** The function before uploading the file. The parameter is the uploaded file. If it returns false or Promise, the upload will stop. */
   beforeUpload?: (file: File) => boolean | Promise<File>;
+  /**The function when uploading files */
   onProgress?: (percentage: number, file: UploadFile) => void;
+  /**The function when the file is uploaded successfully */
   onSuccess?: (data: any, file: UploadFile) => void;
+  /**The function when file upload fails */
   onError?: (err: any, file: UploadFile) => void;
+  /** The function when the file status changes, it will be called when the upload succeeds or fails */
   onChange?: (file: UploadFile) => void;
+  /**The function when removing files from the file list */
   onRemove?: (file: UploadFile) => void;
+  /**Set the upload request header */
   headers?: { [key: string]: any };
+  /**Uploaded file's field name */
   name?: string;
+  /**Additional parameters when uploading */
   data?: { [key: string]: any };
+  /**Support sending cookie credential information */
   withCredentials?: boolean;
+  /**Optional parameter, accept upload file type */
   accept?: string;
+  /**Whether to support multiple selection files */
   multipleSelect?: boolean;
-  multipleUpload?: boolean;
+  /** Whether to support drag and drop upload */
   drag?: boolean;
 }
 
+/**
+ * Upload files by clicking or dragging
+ * ### Usage
+ *
+ * ~~~js
+ * import { Upload } from 'normalized'
+ * ~~~
+ */
 export const Upload: FC<UploadProps> = (props) => {
   const {
     action,
@@ -49,7 +71,6 @@ export const Upload: FC<UploadProps> = (props) => {
     withCredentials,
     accept,
     multipleSelect,
-    multipleUpload,
     children,
     drag,
   } = props;
@@ -210,7 +231,6 @@ export const Upload: FC<UploadProps> = (props) => {
 Upload.defaultProps = {
   name: "file",
   multipleSelect: true,
-  multipleUpload: true,
   accept: "*",
 };
 export default Upload;

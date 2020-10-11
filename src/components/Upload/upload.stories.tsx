@@ -59,15 +59,14 @@ const checkUpload = () => {
   };
   return (
     <>
-      {/* <h4>Could check upload file before uploading, for example file size</h4>
-      <br /> */}
+      <p> Could check upload file before uploading, for example file size</p>
       <Upload
         action="https://run.mocky.io/v3/17334c6b-0c04-4f01-9033-eb145b34b5e4"
         onChange={action("changed")}
         beforeUpload={checkFileSize}
       >
         <Button size="lg" btnType="primary">
-          <Icon icon="upload" /> Less than 50Kb!
+          Less than 50Kb!
         </Button>
       </Upload>
     </>
@@ -89,7 +88,7 @@ return (
     onChange={action('changed')}
     beforeUpload={checkFileSize}
   >
-    <Button size="lg" btnType="primary"><Icon icon="upload" /> 不能传大于50Kb！ </Button>
+    <Button size="lg" btnType="primary">Less than 50Kb!</Button>
   </Upload>  
 )
 ~~~
@@ -100,7 +99,6 @@ const dragUpload = () => (
     onChange={action("changed")}
     onRemove={action("removed")}
     name="fileName"
-    multipleUpload
     drag
   >
     <Icon icon="upload" size="5x" theme="secondary" />
