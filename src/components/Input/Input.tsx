@@ -1,5 +1,4 @@
 import React, {
-  FC,
   ReactElement,
   InputHTMLAttributes,
   ChangeEvent,
@@ -37,7 +36,7 @@ export interface InputProps
  * Support all HTMLInput attributes
  */
 
-const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { disabled, size, icon, prepend, append, style, ...restProps } = props;
   const cNames = classNames("normalized-input-wrapper", {
     [`input-size-${size}`]: size,
