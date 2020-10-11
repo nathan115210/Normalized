@@ -24,7 +24,7 @@ npm install normalizedui --save
 
 ```JavaScript
 // import style
-import 'normalized/dist/index.css'
+import 'normalizedui/dist/index.css'
 
 // import component
 import { Button } from 'normalizedui'
