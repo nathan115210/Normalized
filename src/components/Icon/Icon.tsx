@@ -30,7 +30,7 @@ export interface IconProps extends FontAwesomeIconProps {
  * ### Usage
  *
  * ~~~js
- * import {Icon} from 'normalized'
+ * import {Icon} from 'normalizedui'
  * ~~~
  */
 export const Icon: FC<IconProps> = (props) => {

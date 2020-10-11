@@ -26,7 +26,7 @@ export interface AlertProps {
  * ### Usage
  *
  * ~~~js
- * import { Alert } from 'normalized'
+ * import { Alert } from 'normalizedui'
  * ~~~
  */
 export const Alert: FC<AlertProps> = (props) => {

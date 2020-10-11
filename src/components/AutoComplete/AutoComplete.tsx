@@ -39,7 +39,7 @@ export interface AutoCompleteProps extends Omit<InputProps, "onSelect"> {
  * ### Reference method
  *
  * ~~~js
- * import {AutoComplete} from 'normalized'
+ * import {AutoComplete} from 'normalizedui'
  * ~~~
  */
 export const AutoComplete: FC<AutoCompleteProps> = (props) => {

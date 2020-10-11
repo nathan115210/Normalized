@@ -31,7 +31,7 @@ export interface InputProps
  *
  * ~~~js
  * // Usage
- * import { Input } from 'normalized'
+ * import { Input } from 'normalizedui'
  * ~~~
  * Support all HTMLInput attributes
  */

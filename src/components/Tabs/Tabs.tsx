@@ -21,7 +21,7 @@ export interface TabsProps {
  * ### USAGE
  *
  * ~~~js
- * import { Tabs } from 'normalized'
+ * import { Tabs } from 'normalizedui'
  * ~~~
  */
 

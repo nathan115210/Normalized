@@ -45,8 +45,7 @@ export const SelectContext = createContext<ISelectContext>({
  * ### usage
  *
  * ~~~js
- * import { Select } from 'normalized'
- * // 然后可以使用 <Select> 和 <Select.Option>
+ * import { Select } from 'normalizedui'
  * ~~~
  */
 const Select: FC<SelectProps> = (props) => {

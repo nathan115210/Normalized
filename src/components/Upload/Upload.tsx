@@ -51,7 +51,7 @@ export interface UploadProps {
  * ### Usage
  *
  * ~~~js
- * import { Upload } from 'normalized'
+ * import { Upload } from 'normalizedui'
  * ~~~
  */
 export const Upload: FC<UploadProps> = (props) => {

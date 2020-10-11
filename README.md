@@ -17,7 +17,7 @@ This requires
 > Installation
 
 ```shell
-npm install normalized --save
+npm install normalizedui --save
 ```
 
 > Usage example
@@ -27,7 +27,7 @@ npm install normalized --save
 import 'normalized/dist/index.css'
 
 // import component
-import { Button } from 'normalized'
+import { Button } from 'normalizedui'
 ```
 
 ## Join me

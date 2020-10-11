@@ -29,7 +29,7 @@ export type ButtonProps = Partial<NativeButtonProps & AnchorButtonProps>;
  * ### usage
  *
  * ~~~js
- * import { Button } from 'normalized'
+ * import { Button } from 'normalizedui'
  * ~~~
  */
 
