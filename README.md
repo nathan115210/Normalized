@@ -12,6 +12,10 @@ This requires
 
 - TypeScript v3.7 or higher
 
+## What we have now
+
+[Check out](https://5f869561f322ef0022235674-gbduksnstw.chromatic.com/?path=/story/welcome-page--welcome) what components we have for now, of course more and more fancy components on the way.
+
 ## Getting started
 
 > Installation

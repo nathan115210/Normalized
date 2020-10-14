@@ -45,7 +45,7 @@
     "build-ts": "tsc -p tsconfig.build.json",
     "build-css": "node-sass ./src/styles/index.scss ./dist/index.css",
     "prepublish": "npm run build",
-    "chromatic": "npx chromatic --project-token process.CHROMATIC-TOKEN"
+    "chromatic": "npx chromatic --project-token process.env.CHROMATIC-TOKEN"
   },
   "eslintConfig": {
     "extends": "react-app"
