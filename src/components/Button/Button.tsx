@@ -5,15 +5,15 @@ export type ButtonType = "primary" | "danger" | "link" | "default";
 export type ButtonSize = "lg" | "sm";
 
 interface BaseButtonProps {
-  /** can be set to primary ghost dashed link or default */
+  /** Different types */
   btnType?: ButtonType;
-  /** add customized className for button */
+  /** set the size of button */
   size?: ButtonSize;
-  /** redirect url of link button */
+  /** add customized className for button */
   className?: string;
   /** disabled state of button */
   disabled?: boolean;
-  /** set the size of button */
+  /** redirect url of link button */
   href?: string;
   children: React.ReactNode;
 }
