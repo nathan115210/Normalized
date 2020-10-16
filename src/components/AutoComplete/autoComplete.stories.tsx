@@ -15,18 +15,18 @@ interface GithubUserProps {
 }
 const simpleComplete = () => {
   const lakers = [
-    "bradley",
-    "pope",
-    "caruso",
-    "cook",
-    "cousins",
-    "james",
+    "Bradley",
+    "Pope",
+    "Caruso",
+    "Cook",
+    "Cousins",
+    "James",
     "AD",
-    "green",
-    "howard",
-    "kuzma",
+    "Green",
+    "Howard",
+    "Kuzma",
     "McGee",
-    "rando",
+    "Rando",
   ];
   const handleFetch = (query: string) => {
     return lakers
@@ -46,18 +46,18 @@ const textComplete = `
 ### Code sample
 ~~~javascript
 const lakers = [
-    "bradley",
-    "pope",
-    "caruso",
-    "cook",
-    "cousins",
-    "james",
+    "Bradley",
+    "Pope",
+    "Caruso",
+    "Cook",
+    "Cousins",
+    "James",
     "AD",
-    "green",
-    "howard",
-    "kuzma",
+    "Green",
+    "Howard",
+    "Kuzma",
     "McGee",
-    "rando",
+    "Rando",
   ];
   const handleFetch = (query: string) => {
     return lakers
