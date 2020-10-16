@@ -14,7 +14,7 @@ This requires
 
 ## What we have now
 
-[Check out](https://5f869561f322ef0022235674-gbduksnstw.chromatic.com/?path=/story/welcome-page--welcome) what components we have for now, of course more and more fancy components on the way.
+[Check out](https://www.chromatic.com/library?appId=5f869561f322ef0022235674) what components we have for now, of course more and more fancy components on the way.
 
 ## Getting started
 
